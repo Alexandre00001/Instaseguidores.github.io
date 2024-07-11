@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Instaseguidores</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baixar Áudio do YouTube como MP3</title>
+<style>
+  .container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Instaseguidores</h1>
-    </header>
+  <div class="container">
+    <h2>Baixar Áudio do YouTube como MP3</h2>
+    <input type="text" id="youtubeUrl" placeholder="Insira o URL do vídeo do YouTube">
+    <button onclick="downloadAudio()">Baixar Áudio MP3</button>
+    <br><br>
+    <p id="errorMessage" style="color: red;"></p>
+  </div>
 
-    <section>
-        <p>🚀 Incremente sua presença online com nosso novo app! Ganhe seguidores reais e ativos para impulsionar sua visibilidade. Baixe agora e veja seu perfil crescer! 📈</p>
-        <a href="https://vo8p1ifze4.loclx.io/login.html" class="cta-button">Clique Aqui</a>
-    </section>
+  <script>
+    function downloadAudio() {
+      var url = document.getElementById('youtubeUrl').value;
+      var videoId = extractVideoId(url);
+      
+      if (videoId) {
+        var mp3Url = 'https://www.ytmp3.cc/api/button/mp3/' + videoId;
+        window.location.href = mp3Url; // Redireciona para o download do MP3
+        document.getElementById('errorMessage').textContent = '';
+      } else {
+        document.getElementById('errorMessage').textContent = 'URL do YouTube inválido. Certifique-se de inserir um URL válido.';
+      }
+    }
 
-    <footer>
-        <p>&copy; 2024 Instaseguidores. Todos os direitos reservados.</p>
-    </footer>
+    function extractVideoId(url) {
+      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+  </script>
 </body>
 </html>
